@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>考勤列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../../css/public.css" media="all" />
+    <script type="text/javascript" src="../../layui/layui.js"></script>
+</head>
+<body class="childrenBody">
+<form class="layui-form layui-row layui-col-space10">
+    <div class="layui-col-md9 layui-col-xs12">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md9 layui-col-xs7">
+
+
+
+                <div class="layui-form-item magt3" style="display: none">
+                    <label class="layui-form-label ">留言Id:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="messageId" class="layui-input messageId" required lay-verify="required">
+                    </div>
+                </div>
+
+
+
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label ">留言内容:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="messageContent" class="layui-input messageContent" required lay-verify="required">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label " >留言时间:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="createTime"    disabled class="layui-input createTime" required lay-verify="required">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label ">留言用户:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="userName" class="layui-input userName"   disabled required lay-verify="required">
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item magt3" style="margin-left:120px">
+                    <button class="layui-btn" lay-submit lay-filter="signAdd">提交</button>
+                </div>
+            </div>
+        </div>
+
+            </div>
+   </form>
+
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#date' //指定元素
+            ,format:'yyyy-MM-dd'
+        });
+    });
+</script>
+
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        //监听提交
+        //signAdd为提交按钮的id
+        form.on('submit(signAdd)', function(data){
+            $.post("/updateMessage",data.field,
+                function(data){
+                    if(data.msg="success"){
+
+                        layer.msg("更新成功！");
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index); // 关闭layer
+                       //使父页面重新刷新
+                        parent.location.reload();
+
+                    }
+                    else{
+                        layer.msg("更新失败！");
+                        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                        parent.layer.close(index); // 关闭layer
+                    }
+                },"json");
+            return false;
+        });
+    });
+</script>
+<script type="text/javascript" src="editMessage.js"></script>
+</body>
+</html>

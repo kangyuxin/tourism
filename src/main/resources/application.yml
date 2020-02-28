@@ -1,0 +1,27 @@
+server:
+  port: 3999
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/travel?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+      username: root
+      password: kyx950523
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.test.tourism.model
+  configuration:
+    map-underscore-to-camel-case: true
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
+  returnPageInfo: check
+
+  #
+logging:
+  level:
+    com.travel.mapper: debug

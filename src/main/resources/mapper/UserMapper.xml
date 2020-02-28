@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.tourism.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.test.tourism.model.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_password
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <insert id="insertSelective" parameterType="com.test.tourism.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.tourism.model.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+
+  <!--自己写的-->
+  <select id="login" resultType="com.test.tourism.model.User">
+ select * from user where user_name=#{userName} and user_password=#{userPassword} and user_type=#{userType}
+  </select>
+  <!--注册之前查询用户是否已经注册-->
+  <select id="isRegister"  resultType="com.test.tourism.model.User">
+       select * from user where user_name = #{userName}
+   </select>
+
+  <insert id="register" parameterType="com.test.tourism.model.User" >
+    insert into user (user_name, user_password,create_time,user_type
+      )
+    values (#{userName}, #{userPassword},now(),"user"
+      )
+  </insert>
+  <!--查询所有用户-->
+  <select id="findAllUser"  resultType="com.test.tourism.model.User">
+    select * from user where user_type="user"
+  </select>
+
+  <delete id="deleteById" >
+    delete from user
+    where user_id = #{userId}
+</delete>
+
+  <update id="updateById" parameterType="com.test.tourism.model.User" >
+    update user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR}
+    where user_id = #{userId}
+  </update>
+
+</mapper>

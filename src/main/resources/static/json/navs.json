@@ -1,0 +1,52 @@
+{
+	"contentManagement": [
+		{
+			"title": "游客管理",
+			"icon": "&#xe621;",
+			"href": "page/user/userList.html",
+			"spread": false
+
+		},
+		{
+			"title": "旅游管理",
+			"icon": "&#xe641;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "国内外旅游线路",
+					"icon": "&#xe669;",
+					"href": "page/scenery/sceneryList.html",
+					"spread": false
+				},
+				{
+					"title": "机票预定",
+					"icon": "&#xe669;",
+					"href": "page/flight/flightList.html",
+					"spread": false
+				},
+				{
+					"title": "酒店预定",
+					"icon": "&#xe669;",
+					"href": "page/hotel/hotelList.html",
+					"spread": false
+				},
+				{
+					"title": "出租车预定",
+					"icon": "&#xe669;",
+					"href": "page/car/carList.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "留言管理",
+			"icon": "&#xe648;",
+			"href": "page/message/messageList.html",
+			"spread": false
+		}
+	]
+
+}
+
+

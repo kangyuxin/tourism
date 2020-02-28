@@ -1,0 +1,10 @@
+{
+	"cmsName": "kyx的旅游后台管理",
+	"version": "v1.0",
+	"author": "康育鑫",
+	"homePage": "index.html",
+	"server": "LayUI框架，后台：Java1.8，SpringBoot + Mybatis框架",
+	"dataBase": "MySQL5.8",
+	"userRights": "普通管理员",
+	"powerby": "copyright @2019 康育鑫"
+}

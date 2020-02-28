@@ -1,0 +1,21 @@
+{
+	"code": 0,
+	"msg": "",
+	"count": 15,
+	"data": [
+		{
+			
+            "studentId":"1",
+            "studentName":"康育鑫",
+            "studentNumber":"SA19225203",
+            "studentGrade":"2019级软设2",
+            "studentSex":"男",
+            "studentPhoneNumber":"17850085595",
+            "studentAddress":"苏州",
+            "studentBirthday":"1995-05-23",
+            "createTime":"2020-01-08 21:31:48",
+            "updateTime":"2018-01-08 21:31:48"
+		}
+	]
+}	
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.tourism.mapper.FlightMapper" >
+    <!--查询国内外所有航班-->
+    <select id="findAllFlight" resultType="com.test.tourism.model.Flight">
+      select  * from flight
+   </select>
+    <!--根据id查询具体的航班-->
+    <select id="findFlightById" resultType="com.test.tourism.model.Flight">
+      select  * from flight where flight_id =#{id}
+   </select>
+
+    <insert id="addFlight" parameterType="com.test.tourism.model.Flight" >
+    insert into flight (flight_price, flight_seats, flight_fromCity, flight_toCity)
+    values (#{flightPrice},#{flightSeats},#{flightFromCity},#{flightToCity})
+    </insert>
+
+    <!--根据出发地名查询具体的航班-->
+    <select id="findFlightCityByName" resultType="com.test.tourism.model.Flight">
+      select  * from flight where flight_fromCity =#{fromCity}
+   </select>
+    <!--根据id删除-->
+    <delete id="deleteFlightById">
+        delete  from flight where flight_id=#{id}
+    </delete>
+    <update id="updateFlight" parameterType="com.test.tourism.model.Flight">
+        update flight set flight_price=#{flightPrice},flight_seats=#{flightSeats},
+        flight_fromCity=#{flightFromCity},flight_toCity=#{flightToCity}
+      where flight_id=#{flightId}
+</update>
+</mapper>

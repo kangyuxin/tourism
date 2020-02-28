@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.tourism.mapper.SceneryMapper" >
+  <!--查询国内外所有景点-->
+   <select id="findAllScenery" resultType="com.test.tourism.model.Scenery">
+      select  * from scenery
+   </select>
+<!--根据id查询具体的景点-->
+    <select id="findById" resultType="com.test.tourism.model.Scenery">
+      select  * from scenery where scenery_id =#{id}
+   </select>
+
+    <!--根据城市名查询具体的景点-->
+    <select id="findCityByName" resultType="com.test.tourism.model.Scenery">
+      select  * from scenery where scenery_city =#{name}
+   </select>
+ <!--根据id删除-->
+    <delete id="deleteSceneryById">
+        delete  from scenery where scenery_id=#{id}
+    </delete>
+    <update id="updateScenery" parameterType="com.test.tourism.model.Scenery">
+        update scenery set scenery_city=#{sceneryCity},scenery_title=#{sceneryTitle},
+        scenery_introduce=#{sceneryIntroduce},scenery_price=#{sceneryPrice},scenery_route=#{sceneryRoute}
+      where scenery_id=#{sceneryId}
+    </update>
+
+    <insert id="addScenery" parameterType="com.test.tourism.model.Scenery" >
+    insert into scenery (scenery_city, scenery_title, scenery_price, scenery_route)
+    values (#{sceneryCity},#{sceneryTitle},#{sceneryPrice},#{sceneryRoute})
+    </insert>
+</mapper>

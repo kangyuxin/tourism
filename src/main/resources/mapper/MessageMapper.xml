@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.tourism.mapper.MessageMapper" >
+
+  <!--根据具体的游记id 查询留言-->
+
+  <select id="findMessageById" resultType="com.test.tourism.model.Message">
+ select * from message where travel_id =#{id}  order by create_time desc</select>
+
+<!--根据具体的游记id插入一条留言,并返回插入数据的message_id,封装到实体messageId上面-->
+  <insert id="sendMessage" parameterType="com.test.tourism.model.Message" keyProperty="messageId" useGeneratedKeys="true">
+    insert into message (create_time, message_content,
+       user_name, user_head,
+      travel_id)
+    values ( now(), #{messageContent},
+      #{userName}, #{userHead},
+      #{travelId})
+  </insert>
+
+  <select id="findById" resultType="com.test.tourism.model.Message">
+
+    select * from message where message_id=#{id}
+  </select>
+
+  <delete id="deleteMessageById" >
+    delete  from message where message_id=#{id}
+  </delete>
+
+
+    <select id="findAllMessage" resultType="com.test.tourism.model.Message">
+ select * from message  order by create_time desc
+
+</select>
+
+<update id="updateMessage" parameterType="com.test.tourism.model.Message">
+    update message set message_content=#{messageContent} where message_id=#{messageId}
+</update>
+</mapper>
